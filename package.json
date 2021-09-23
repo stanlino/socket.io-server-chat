@@ -1,0 +1,19 @@
+{
+  "name": "socket.io-server-chat",
+  "version": "1.0.0",
+  "description": "A server for a chat app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stanlino/socket.io-server-chat.git"
+  },
+  "author": "Stanley filipe Neiva",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stanlino/socket.io-server-chat/issues"
+  },
+  "homepage": "https://github.com/stanlino/socket.io-server-chat#readme"
+}
