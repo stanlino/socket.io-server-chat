@@ -1,11 +1,22 @@
-const express = require('express')
-const socketIO = require('socket.io')
-
+const express = require('express');
+const app = express();
+const http = require('http');
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server);
 const PORT = process.env.PORT || 3000;
-const INDEX = '/index.html';
 
-const server = express()
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
+});
 
-server.use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+io.on('connection', (socket) => {
+  console.log('a user connected');
+  socket.on("new-message", (msg) => {
+      io.emit("new-message", msg)
+  })
+});
 
-server.listen(PORT, () => console.log(`Listening on ${PORT}`));
+server.listen(PORT, () => {
+  console.log(`listening on http://localhost:3000`);
+});
