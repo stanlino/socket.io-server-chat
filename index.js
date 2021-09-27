@@ -10,17 +10,17 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html')
 })
 
-const namespace = io.of(/^\/[a-z]{3}-[a-z]{4}-[a-z]{3}$/)
+const namespace = io.of('chat')
 
 namespace.on('connection', (socket) => {
 
-    socket.on('new-message', (msg) => {
-      socket.broadcast.emit('new-message', msg)
-      socket.emit('uploaded-message', msg.id)
+    socket.on('new-message', (msg, received) => {
+      received('received')
+      socket.to(msg.to).emit('new-message', msg)
     })
     
-    socket.on('message-received', (id_msg) => {
-      socket.broadcast.emit('message-received', id_msg)
+    socket.on('message-received', (data) => {
+      socket.to(data.to).emit('message-received', data)
     })
 
 })
