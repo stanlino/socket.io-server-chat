@@ -18,14 +18,9 @@ namespace.on('connection', (socket) => {
 		socket.join(room)
 	})
 
-    socket.on('new-message', (msg, received) => {
-      received('received')
-      socket.to(msg.to).emit('new-message', msg)
-    })
-    
-    socket.on('message-received', data => {
-      socket.to(data.to).emit('message-received', data)
-    })
+  socket.on('new-message', (msg) => {
+    socket.to(msg.to).emit('new-message', msg)
+  })
 
 })
 
