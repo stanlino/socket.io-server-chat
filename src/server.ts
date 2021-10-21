@@ -1,11 +1,13 @@
-const express = require('express')
-const app = express()
-const http = require('http')
-const server = http.createServer(app)
-const { Server } = require('socket.io')
-const io = new Server(server)
-const PORT = process.env.PORT || 3000
+import express from 'express'
+import { Server } from 'socket.io'
+import http from 'http'
 
+const app = express()
+const server = http.createServer(app)
+const io = new Server(server)
+
+const PORT = process.env.PORT || 3000
+ 
 app.get('/', (request, response) => {
   response.send('Não há nada para ver aqui')
 })
