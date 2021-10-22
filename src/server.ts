@@ -2,9 +2,8 @@ import express from 'express'
 import { Server } from 'socket.io'
 import http from 'http'
 import admin from 'firebase-admin'
-import dotenv from 'dotenv'
 import { Message } from './@types'
-
+import dotenv from 'dotenv'
 dotenv.config()
 
 const app = express()
@@ -14,7 +13,7 @@ const io = new Server(server)
 const PORT = process.env.PORT || 3000
 
 admin.initializeApp({
-  credential: admin.credential.cert(process.env.SERVICE_ACCOUNT)
+  credential: admin.credential.cert(process.env.SERVICE_ACCOUNT.replace(/\\n/g, '\n'))
 })
 
 app.get('/', (request, response) => {
