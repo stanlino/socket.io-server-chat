@@ -1,10 +1,9 @@
 import express from 'express'
 import { Server } from 'socket.io'
 import http from 'http'
-import admin from 'firebase-admin'
+import admin, { ServiceAccount } from 'firebase-admin'
 import { Message } from './@types'
-import dotenv from 'dotenv'
-dotenv.config()
+import serviceAccountKey from './serviceAccountKey.json'
 
 const app = express()
 const server = http.createServer(app)
@@ -12,8 +11,9 @@ const io = new Server(server)
 
 const PORT = process.env.PORT || 3000
 
+const serviceAccount = serviceAccountKey as ServiceAccount
 admin.initializeApp({
-  credential: admin.credential.cert(process.env.SERVICE_ACCOUNT.replace(/\\n/g, '\n'))
+  credential: admin.credential.cert(serviceAccount)
 })
 
 app.get('/', (request, response) => {
